@@ -1,0 +1,9 @@
+
+# Directories #
+.idea/
+
+# Compiled Source Code #
+*.class
+
+# Config files #
+cs351-remi-tile.iml
