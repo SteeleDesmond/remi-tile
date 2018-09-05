@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.Pane?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextArea editable="false" prefHeight="400.0" prefWidth="600.0" text="Basic Rules:&#10;&#10;• Players draw lots to determine who goes first&#10;• Players take turns• On his/her turn the player&#10;• picks one tile from from the tile pool or from the top of the discard pile of the opponent&#10;• adds the new tile to the board&#10;• discards one tile from the board on top of his/her discard pile&#10;• if the tile pool is empty the discard tiles are returned to the pool&#10;• A first player wins the game by being the first to build a winning configuration&#10;• 14 tiles organized in terms of sets or runs&#10;• 1 tile to discard&#10;• Winner gains -50 points&#10;• Loser gains the sum total of the values of the tiles on the board with the jocker counted as 25 points&#10;• The game is played until a set number of points (e.g., 200) is reached by any of the players&#10;• The overall winner is the player with fewest number of points" />
+   </children>
+</Pane>
