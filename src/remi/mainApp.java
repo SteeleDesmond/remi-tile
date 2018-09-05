@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import remi.display.DisplayController;
+import remi.entities.Player;
 
 import java.io.IOException;
 import java.time.Duration;
@@ -25,6 +26,7 @@ public class mainApp extends Application {
         BorderPane rootPane = loader.load(getClass().getResourceAsStream("display/display.fxml"));
         primaryStage.setScene(new Scene(rootPane));
         primaryStage.show();
+
 
         AnimationTimer a = new AnimationTimer() {
             private long nextTime = 0;

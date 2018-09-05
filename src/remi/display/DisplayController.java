@@ -2,43 +2,56 @@ package remi.display;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class DisplayController {
 
-    @FXML BorderPane rootPane;
-    @FXML StackPane tilePool;
-    @FXML StackPane playerOneDiscard;
-    @FXML StackPane playerTwoDiscard;
-    @FXML FlowPane playerOneHand;
-    @FXML FlowPane playerTwoHand;
-    @FXML Pane gameTable;
+    @FXML private BorderPane rootPane;
+    @FXML private StackPane tilePool;
+    @FXML private StackPane playerOneDiscard;
+    @FXML private StackPane playerTwoDiscard;
+    @FXML private FlowPane playerOneHand;
+    @FXML private FlowPane playerTwoHand;
+    @FXML private Pane gameTable;
 
+    private ArrayList<Tile> tileSet;
 
     @FXML
     private void initialize() {
-        Tile newTile = new Tile(1, "blue", false);
-        placeTile(newTile,"playerOneHand");
-        Tile newTile2 = new Tile(13, "yellow", false);
-        placeTile(newTile2,"playerTwoHand");
-        Tile newTile3 = new Tile(12, "green", false);
-        placeTile(newTile3,"gameTable");
-        Tile newTile4 = new Tile(8, "red", false);
-        placeTile(newTile4,"tilePool");
-        Tile newTile5 = new Tile(5, "red", false);
-        placeTile(newTile5, "playerOneDiscard");
-        Tile newTile6 = new Tile(6, "red", false);
-        placeTile(newTile6, "playerTwoDiscard");
+        tileSet = new ArrayList<>();
+        generateTiles();
 
+        for(int i = 0; i < 14; i++) {
+            placeTile(tileSet.get(i), "playerOneHand");
+        }
+        for(int i = 14; i < 28; i++) {
+            placeTile(tileSet.get(i), "playerTwoHand");
+        }
     }
 
+    private void generateTiles() {
+
+        for(int i = 0; i < 13; i++) {
+            Tile newRedTile = new Tile(i, "Red", false);
+            Tile newBlueTile = new Tile(i, "Blue", false);
+            Tile newGreenTile = new Tile(i, "Green", false);
+            Tile newYellowTile = new Tile(i, "Yellow", false);
+            tileSet.add(newRedTile);
+            tileSet.add(newBlueTile);
+            tileSet.add(newGreenTile);
+            tileSet.add(newYellowTile);
+        }
+        Tile redJokerTile = new Tile(0, "Red", true);
+        Tile blueJokerTile = new Tile(0, "Blue", true);
+        tileSet.add(redJokerTile);
+        tileSet.add(blueJokerTile);
+    }
 
     @FXML
     public void placeTile(Tile tile, String location) {
@@ -86,6 +99,10 @@ public class DisplayController {
         tileSize.setStrokeType(reference.getStrokeType());
     }
 
+
+    /**
+     * Opens the helpWindow file with the game rules. Called when the help button is clicked
+     */
     @FXML
     private void getHelpWindow() throws IOException {
 
