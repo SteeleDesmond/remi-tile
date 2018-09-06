@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import remi.display.DisplayController;
-import remi.entities.Player;
+import remi.game.GameCoordinator;
 
 import java.io.IOException;
 import java.time.Duration;
@@ -15,6 +15,7 @@ import java.time.Duration;
 public class mainApp extends Application {
 
     private static DisplayController controller = new DisplayController();
+    private GameCoordinator coordinator = new GameCoordinator();
 
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -27,6 +28,7 @@ public class mainApp extends Application {
         primaryStage.setScene(new Scene(rootPane));
         primaryStage.show();
 
+        coordinator.start();
 
         AnimationTimer a = new AnimationTimer() {
             private long nextTime = 0;

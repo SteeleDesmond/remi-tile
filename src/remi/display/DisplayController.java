@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import remi.tile.Tile;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,37 +21,8 @@ public class DisplayController {
     @FXML private FlowPane playerTwoHand;
     @FXML private Pane gameTable;
 
-    private ArrayList<Tile> tileSet;
-
     @FXML
     private void initialize() {
-        tileSet = new ArrayList<>();
-        generateTiles();
-
-        for(int i = 0; i < 14; i++) {
-            placeTile(tileSet.get(i), "playerOneHand");
-        }
-        for(int i = 14; i < 28; i++) {
-            placeTile(tileSet.get(i), "playerTwoHand");
-        }
-    }
-
-    private void generateTiles() {
-
-        for(int i = 0; i < 13; i++) {
-            Tile newRedTile = new Tile(i, "Red", false);
-            Tile newBlueTile = new Tile(i, "Blue", false);
-            Tile newGreenTile = new Tile(i, "Green", false);
-            Tile newYellowTile = new Tile(i, "Yellow", false);
-            tileSet.add(newRedTile);
-            tileSet.add(newBlueTile);
-            tileSet.add(newGreenTile);
-            tileSet.add(newYellowTile);
-        }
-        Tile redJokerTile = new Tile(0, "Red", true);
-        Tile blueJokerTile = new Tile(0, "Blue", true);
-        tileSet.add(redJokerTile);
-        tileSet.add(blueJokerTile);
     }
 
     @FXML
@@ -84,6 +56,44 @@ public class DisplayController {
 //        newTile.getPane().setLayoutY(20);
     }
 
+    public void removeTile(Tile tile, String location) {
+
+        location = location.toLowerCase();
+
+        switch (location) {
+            case "tilepool":
+                if(tilePool.getChildren().contains(tile.getPane())) {
+                    tilePool.getChildren().remove(tile.getPane());
+                }
+                break;
+            case "playeronehand":
+                if(playerOneHand.getChildren().contains(tile.getPane())) {
+                    playerOneHand.getChildren().remove(tile.getPane());
+                }
+                break;
+            case "playertwohand":
+                if(playerTwoHand.getChildren().contains(tile.getPane())) {
+                    playerTwoHand.getChildren().remove(tile.getPane());
+                }
+                break;
+            case "gametable":
+                if(gameTable.getChildren().contains(tile.getPane())) {
+                    gameTable.getChildren().remove(tile.getPane());
+                }
+                break;
+            case "playeronediscard":
+                if(playerOneDiscard.getChildren().contains(tile.getPane())) {
+                    playerOneDiscard.getChildren().remove(tile.getPane());
+                }
+                break;
+            case "playertwodiscard":
+                if(playerTwoDiscard.getChildren().contains(tile.getPane())) {
+                    playerTwoDiscard.getChildren().remove(tile.getPane());
+                }
+                break;
+        }
+    }
+
     /**
      * Uses the tilePool base tile as the template tile for all tiles
      * Sets a tile's rectangle display and size properties
@@ -98,7 +108,6 @@ public class DisplayController {
         tileSize.setStroke(reference.getStroke());
         tileSize.setStrokeType(reference.getStrokeType());
     }
-
 
     /**
      * Opens the helpWindow file with the game rules. Called when the help button is clicked

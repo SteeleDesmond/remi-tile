@@ -1,4 +1,4 @@
-package remi.display;
+package remi.tile;
 
 
 import javafx.scene.layout.StackPane;
