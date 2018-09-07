@@ -65,6 +65,10 @@ public class Tile {
         this.pane = pane;
     }
 
+    /**
+     * Sets the properties that a tile needs to have to be a tile for JavaFX. Can be ignored for other displays.
+     * @return the StackPane for the constructor
+     */
     private StackPane makePaneTemplate() {
 
         StackPane newPane = new StackPane();

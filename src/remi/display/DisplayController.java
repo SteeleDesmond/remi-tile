@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import remi.tile.Tile;
 
@@ -19,7 +20,9 @@ public class DisplayController {
     @FXML private StackPane playerTwoDiscard;
     @FXML private FlowPane playerOneHand;
     @FXML private FlowPane playerTwoHand;
-    @FXML private Pane gameTable;
+    @FXML private FlowPane gameTable;
+    @FXML private Text playerOneScore;
+    @FXML private Text playerTwoScore;
 
     @FXML
     private void initialize() {
@@ -56,10 +59,14 @@ public class DisplayController {
 //        newTile.getPane().setLayoutY(20);
     }
 
+    /**
+     *
+     * @param tile The tile you wish to remove
+     * @param location The location of the given tile
+     */
     public void removeTile(Tile tile, String location) {
 
         location = location.toLowerCase();
-
         switch (location) {
             case "tilepool":
                 if(tilePool.getChildren().contains(tile.getPane())) {
@@ -94,9 +101,40 @@ public class DisplayController {
         }
     }
 
+
+    /**
+     *
+     * @param player Which player's score to update
+     * @param amount The amount to change the score to
+     */
+    public void updateScore(String player, int amount) {
+        if (player.toLowerCase().equals("playerone")) {
+            playerOneScore.setText(String.valueOf(amount));
+        }
+        /* Else it is player two for this application*/
+        else {
+            playerTwoScore.setText(String.valueOf(amount));
+        }
+    }
+
+    /**
+     *
+     * @param player the player you want the score of
+     * @return the score of the given player
+     */
+    public int getScore(String player) {
+        if (player.toLowerCase().equals("playerone")) {
+            return Integer.getInteger(playerOneScore.getText());
+        }
+        /* Else it is player two for this application*/
+        else {
+            return Integer.getInteger(playerTwoScore.getText());
+        }
+    }
+
     /**
      * Uses the tilePool base tile as the template tile for all tiles
-     * Sets a tile's rectangle display and size properties
+     * Sets a tile's rectangle display and size properties. The tile number and color are set in the Tile constructor
      */
     private void setTileProperties(Tile tile) {
 
