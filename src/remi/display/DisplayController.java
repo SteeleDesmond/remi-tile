@@ -1,8 +1,10 @@
 package remi.display;
 
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -25,24 +27,11 @@ public class DisplayController {
     @FXML private FlowPane gameTable;
     @FXML private Text playerOneScore;
     @FXML private Text playerTwoScore;
-
-    private boolean tileClicked = false;
-    private boolean oneDiscardClicked = false;
-    private boolean twoDiscardClicked = false;
-    private boolean tilePoolClicked = false;
     private int clickCounter = 0;
 
     @FXML
     private void initialize() {
 
-        playerOneDiscard.setOnMouseClicked(event -> {
-            oneDiscardClicked = true;
-            mouseClickedHandler();
-        });
-        playerTwoDiscard.setOnMouseClicked(event -> {
-            twoDiscardClicked = true;
-            mouseClickedHandler();
-        });
     }
 
     @FXML
@@ -166,35 +155,41 @@ public class DisplayController {
         tileSize.setFill(reference.getFill());
         tileSize.setStroke(reference.getStroke());
         tileSize.setStrokeType(reference.getStrokeType());
-
-        tileSize.setOnMouseClicked(event -> {
-            clickCounter++;
-            System.out.println(clickCounter);
-            tileSize.setStroke(Color.LIGHTBLUE);
-            tileClicked = true;
-            if(playerOneDiscard.getChildren().contains(tile.getPane())) {
-                oneDiscardClicked = true;
-            }
-            else if (playerTwoDiscard.getChildren().contains(tile.getPane())) {
-                twoDiscardClicked = true;
-            }
-            else if (tilePool.getChildren().contains(tile.getPane())) {
-                tilePoolClicked = true;
-            }
-            if(clickCounter >= 2) {
-                clickCounter = 0;
-                tileSize.setFill(reference.getFill());
-                oneDiscardClicked = false;
-                twoDiscardClicked = false;
-                tilePoolClicked = false;
-                clickCounter = 0;
-                mouseClickedHandler();
-            }
-        });
     }
 
-    public void mouseClickedHandler() {
+    public void setTileSelect(Tile tile, boolean selection) {
+        tile.setSelected(selection);
+    }
 
+    @FXML
+    private void playerOneHandClicked(MouseEvent e) {
+        clickCounter++;
+
+        if(clickCounter >= 2) {
+            clickCounter = 0;
+        }
+        System.out.println(e.getX());
+        System.out.println("test");
+    }
+
+    @FXML
+    private void playerTwoDiscardClicked(MouseEvent e) {
+        System.out.println("2discard");
+
+    }
+
+    @FXML
+    private void playerOneDiscardClicked(MouseEvent e) {
+        System.out.println("1discard");
+
+        if(clickCounter == 1) {
+
+        }
+    }
+
+    @FXML
+    private void tilePoolClicked(MouseEvent e) {
+        System.out.println("tilepool");
     }
 
     /**

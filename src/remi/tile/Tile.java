@@ -76,8 +76,19 @@ public class Tile {
         return isSelected;
     }
 
+    /**
+     * Highlight the tile in JavaFX
+     * @param selected set whether the tile is to appear selected or not
+     */
     public void setSelected(boolean selected) {
         isSelected = selected;
+
+        if(selected) {
+            rectangle.setStroke(Color.LIGHTBLUE);
+        }
+        else {
+            rectangle.setStroke(Color.BLACK);
+        }
     }
 
     /**

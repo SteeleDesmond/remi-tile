@@ -14,12 +14,12 @@
       <Pane prefHeight="200.0" prefWidth="150.0" BorderPane.alignment="CENTER">
          <children>
             <Text layoutX="28.0" layoutY="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 2 Discard" />
-            <StackPane fx:id="tilePool" layoutX="40.0" layoutY="160.0" prefHeight="80.0" prefWidth="60.0">
+            <StackPane fx:id="tilePool" layoutX="40.0" layoutY="160.0" onMouseClicked="#tilePoolClicked" prefHeight="80.0" prefWidth="60.0">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="80.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
                </children>
             </StackPane>
-            <StackPane fx:id="playerTwoDiscard" layoutX="40.0" layoutY="14.0" prefHeight="80.0" prefWidth="60.0">
+            <StackPane fx:id="playerTwoDiscard" layoutX="40.0" layoutY="14.0" onMouseClicked="#playerTwoDiscardClicked" prefHeight="80.0" prefWidth="60.0">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="80.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
                </children>
@@ -31,7 +31,7 @@
    <right>
       <Pane prefHeight="200.0" prefWidth="150.0" BorderPane.alignment="CENTER">
          <children>
-            <StackPane fx:id="playerOneDiscard" layoutX="45.0" layoutY="300.0" prefHeight="80.0" prefWidth="60.0">
+            <StackPane fx:id="playerOneDiscard" layoutX="45.0" layoutY="300.0" onMouseClicked="#playerOneDiscardClicked" prefHeight="80.0" prefWidth="60.0">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="80.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
                </children>
@@ -43,7 +43,7 @@
    <bottom>
       <Pane prefHeight="200.0" prefWidth="1400.0" BorderPane.alignment="CENTER">
          <children>
-            <FlowPane fx:id="playerOneHand" layoutX="250.0" prefHeight="80.0" prefWidth="900.0" />
+            <FlowPane fx:id="playerOneHand" layoutX="250.0" onMouseClicked="#playerOneHandClicked" prefHeight="80.0" prefWidth="900.0" />
             <Text fill="RED" layoutX="1239.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player One Score">
                <font>
                   <Font name="System Bold" size="15.0" />

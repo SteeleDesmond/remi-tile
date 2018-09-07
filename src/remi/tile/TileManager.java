@@ -36,6 +36,7 @@ public class TileManager {
             playerTwoHand.addTile(tilePool.pop());
             display.placeTile(playerOneHand.getTile(i), "playerOneHand");
             display.placeTile(playerTwoHand.getTile(i), "playerTwoHand");
+            display.hideTile(playerTwoHand.getTile(i));
         }
         display.placeTile(tilePool.peek(), "tilePool");
         System.out.println(tilePool.size());
