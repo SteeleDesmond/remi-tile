@@ -43,7 +43,7 @@
    <bottom>
       <Pane prefHeight="200.0" prefWidth="1400.0" BorderPane.alignment="CENTER">
          <children>
-            <FlowPane fx:id="playerOneHand" layoutX="280.0" prefHeight="80.0" prefWidth="840.0" />
+            <FlowPane fx:id="playerOneHand" layoutX="250.0" prefHeight="80.0" prefWidth="900.0" />
             <Text fill="RED" layoutX="1239.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player One Score">
                <font>
                   <Font name="System Bold" size="15.0" />
@@ -60,7 +60,7 @@
    <top>
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <FlowPane fx:id="playerTwoHand" layoutX="280.0" layoutY="120.0" prefHeight="80.0" prefWidth="840.0" />
+            <FlowPane fx:id="playerTwoHand" layoutX="250.0" layoutY="120.0" prefHeight="80.0" prefWidth="900.0" />
             <Button layoutX="1334.0" layoutY="14.0" mnemonicParsing="false" onAction="#getHelpWindow" text="Help?" />
             <Text fill="BLUE" layoutX="1239.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player Two Score">
                <font>

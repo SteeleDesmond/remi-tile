@@ -6,7 +6,7 @@ import remi.mainApp;
 import static java.util.Collections.shuffle;
 
 /**
- * Manage the two discard piles and the tile pool for the game
+ * Manage the two discard piles, the player hands, and the tile pool for the game
  */
 public class TileManager {
 
@@ -28,7 +28,7 @@ public class TileManager {
      */
     public void newGame() {
 
-        // Note: Might have to remove all tiles off of the game board for this to work.
+        // Note: Might have to remove all painted tiles off of the game board for this to work.
         tilePool.newTileSet();
 
         for (int i = 0; i < 14; i++) {
@@ -52,7 +52,13 @@ public class TileManager {
         display.placeTile(tile, endLocation);
     }
 
+    /**
+     * Moves the discard piles to the tile pool. Clears the top display card in the discard piles.
+     */
     public void addDiscardPiles() {
+
+        display.removeTile(playerOneDiscard.pop(), "playerOneDiscard");
+        display.removeTile(playerTwoDiscard.pop(), "playerTwoDiscard");
         while (!playerOneDiscard.isEmpty()) {
             tilePool.push(playerOneDiscard.pop());
         }

@@ -18,14 +18,21 @@ public class Tile {
     private int number;
     private String color;
     private boolean isJoker;
-    private StackPane pane;
+    private boolean isHidden;
+    private boolean isSelected;
+
+    private StackPane pane = new StackPane();
+    private Rectangle rectangle = new Rectangle();
+    private Text text;
 
     public Tile(int number, String color, boolean isJoker) {
         this.number = number;
         this.color = color.toLowerCase();
         this.isJoker = isJoker;
         this.id = nextId;
-        pane = makePaneTemplate();
+        text = new Text(Integer.toString(number));
+        pane.getChildren().addAll(rectangle,text);
+        showTile();
         nextId++;
     }
 
@@ -61,19 +68,32 @@ public class Tile {
         return pane;
     }
 
-    public void setPane(StackPane pane) {
-        this.pane = pane;
+    public boolean isHidden() {
+        return isHidden;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
+
+    /**
+     * Called to make the tile appear face down in JavaFX.
+     */
+    public void hideTile() {
+        rectangle.setFill(Color.CORNFLOWERBLUE);
+        text.setVisible(false);
+        isHidden = true;
     }
 
     /**
      * Sets the properties that a tile needs to have to be a tile for JavaFX. Can be ignored for other displays.
      * @return the StackPane for the constructor
      */
-    private StackPane makePaneTemplate() {
-
-        StackPane newPane = new StackPane();
-        Rectangle rectangle = new Rectangle();
-        Text text = new Text(Integer.toString(number));
+    public void showTile() {
 
         text.setFont(Font.font ("Verdana", FontWeight.BOLD, 20));
         switch(color) {
@@ -90,8 +110,7 @@ public class Tile {
                 text.setFill(Color.ORANGE);
                 break;
         }
-        newPane.getChildren().addAll(rectangle,text);
-        return newPane;
+        isHidden = false;
     }
 }
 
