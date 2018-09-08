@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -15,6 +16,7 @@ import javafx.stage.Stage;
 import remi.tile.Tile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class DisplayController {
 
@@ -27,7 +29,12 @@ public class DisplayController {
     @FXML private FlowPane gameTable;
     @FXML private Text playerOneScore;
     @FXML private Text playerTwoScore;
+    private int relativeTileLocation;
+    private int tileClickedIndex;
+    private boolean actionClicked;
+    private String actionPerformed;
     private int clickCounter = 0;
+    private Tile[] deckTiles = new Tile[3];
 
     @FXML
     private void initialize() {
@@ -43,9 +50,16 @@ public class DisplayController {
         switch(location) {
             case "tilepool":
                 tilePool.getChildren().add(tile.getPane());
+                deckTiles[0] = tile;
                 break;
             case "playeronehand":
-                playerOneHand.getChildren().add(tile.getPane());
+                /*If there is an action click then place the tile at the tile clicked index */
+//                if(actionClicked) {
+//                    playerOneHand.getChildren().add(tileClickedIndex, tile.getPane());
+//                }
+//                else {
+                    playerOneHand.getChildren().add(tile.getPane());
+//                }
                 break;
             case "playertwohand":
                 playerTwoHand.getChildren().add(tile.getPane());
@@ -55,9 +69,11 @@ public class DisplayController {
                 break;
             case "playeronediscard":
                 playerOneDiscard.getChildren().add(tile.getPane());
+                deckTiles[1] = tile;
                 break;
             case "playertwodiscard":
                 playerTwoDiscard.getChildren().add(tile.getPane());
+                deckTiles[2] = tile;
                 break;
 
         }
@@ -157,39 +173,79 @@ public class DisplayController {
         tileSize.setStrokeType(reference.getStrokeType());
     }
 
-    public void setTileSelect(Tile tile, boolean selection) {
-        tile.setSelected(selection);
-    }
-
     @FXML
     private void playerOneHandClicked(MouseEvent e) {
-        clickCounter++;
+        Rectangle reference = (Rectangle) tilePool.getChildren().get(0);
 
-        if(clickCounter >= 2) {
-            clickCounter = 0;
-        }
-        System.out.println(e.getX());
-        System.out.println("test");
+        clickCounter++;
+        actionClicked = true;
+        actionPerformed = "playerOneHandClicked";
+        //System.out.println("actionClicked = " + actionClicked + " actionPerformed = " + actionPerformed);
+
+        //System.out.println(e.getX());
+        tileClickedIndex = (int) e.getX() / (int) reference.getWidth();
+        //System.out.println(tileClickedIndex);
+        relativeTileLocation = (int) e.getX() % (int) reference.getWidth();
     }
 
     @FXML
     private void playerTwoDiscardClicked(MouseEvent e) {
-        System.out.println("2discard");
-
+        clickCounter++;
+        actionClicked = true;
+        actionPerformed = "playerTwoDiscardClicked";
+        //System.out.println("actionClicked = " + actionClicked + " actionPerformed = " + actionPerformed);
     }
 
     @FXML
     private void playerOneDiscardClicked(MouseEvent e) {
-        System.out.println("1discard");
-
-        if(clickCounter == 1) {
-
-        }
+        clickCounter++;
+        actionClicked = true;
+        actionPerformed = "playerOneDiscardClicked";
+        //System.out.println("actionClicked = " + actionClicked + " actionPerformed = " + actionPerformed);
     }
 
     @FXML
     private void tilePoolClicked(MouseEvent e) {
-        System.out.println("tilepool");
+        clickCounter++;
+        actionClicked = true;
+        actionPerformed = "tilePoolClicked";
+        //System.out.println("actionClicked = " + actionClicked + " actionPerformed = " + actionPerformed);
+    }
+
+    public String getActionPerformed() {
+        return actionPerformed;
+    }
+
+    public boolean getActionClicked() {
+       return actionClicked;
+    }
+
+    public void setActionClicked(boolean action) {
+        actionClicked = action;
+    }
+
+    public void setActionPerformed(String action) {
+        actionPerformed = action;
+    }
+
+    public int getClickCounter() {
+        return clickCounter;
+    }
+
+    public void setClickCounter(int amount) {
+        clickCounter = amount;
+    }
+
+    public int getTileIndexClicked() {
+        return tileClickedIndex;
+    }
+
+    public int getRelativeTileLocation() {
+        return relativeTileLocation;
+    }
+
+    public void setTileClickedIndex(int index) {
+        tileClickedIndex = index;
     }
 
     /**

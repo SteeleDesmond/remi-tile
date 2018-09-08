@@ -22,8 +22,8 @@ public class DiscardPile {
         discardPile.push(tile);
     }
 
-    public void peek() {
-        discardPile.peek();
+    public Tile peek() {
+        return discardPile.peek();
     }
 
     public boolean isEmpty() {

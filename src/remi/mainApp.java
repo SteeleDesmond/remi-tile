@@ -15,7 +15,7 @@ import java.time.Duration;
 public class mainApp extends Application {
 
     private static DisplayController controller = new DisplayController();
-    private GameCoordinator coordinator = new GameCoordinator();
+    private GameCoordinator coordinator;
 
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -27,8 +27,7 @@ public class mainApp extends Application {
         BorderPane rootPane = loader.load(getClass().getResourceAsStream("display/display.fxml"));
         primaryStage.setScene(new Scene(rootPane));
         primaryStage.show();
-
-        coordinator.start();
+        coordinator = new GameCoordinator();
 
         AnimationTimer a = new AnimationTimer() {
             private long nextTime = 0;
@@ -37,6 +36,7 @@ public class mainApp extends Application {
             public void handle(long now) {
 
                 if(now > nextTime) {
+                    coordinator.start();
                     nextTime = now + Duration.ofMillis(1).toNanos();
                 }
             }

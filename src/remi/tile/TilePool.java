@@ -50,7 +50,11 @@ public class TilePool {
         }
 
         shuffle(tilePool);
-        System.out.println("Size of tilePool " + tilePool.size());
+        //System.out.println("Size of tilePool " + tilePool.size());
+    }
+
+    public boolean isEmpty() {
+        return tilePool.isEmpty();
     }
 
     public int size() {

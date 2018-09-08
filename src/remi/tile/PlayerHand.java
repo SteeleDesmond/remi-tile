@@ -7,31 +7,32 @@ import java.util.ArrayList;
  */
 public class PlayerHand {
 
-    private Tile playerHand[] = new Tile[14];
+    private ArrayList<Tile> playerHand = new ArrayList<>();
 
     public PlayerHand() {
     }
 
     public Tile getTile(int index) {
-        return playerHand[index];
+        return playerHand.get(index);
     }
 
     public void addTile(Tile tile) {
-        for(int i = 0; i < playerHand.length; i++) {
-            if(playerHand[i] == null) {
-                playerHand[i] = tile;
-                return;
-            }
-        }
+        playerHand.add(tile);
     }
 
     public int size() {
-        int rv = 0;
-        for(int i = 0; i < 14; i++) {
-            if(playerHand[i] != null) {
-                rv++;
-            }
-        }
-        return rv;
+        return playerHand.size();
+    }
+
+    public void removeTile(Tile tile) {
+        playerHand.remove(tile);
+    }
+
+    public void removeTile(int index) {
+        playerHand.remove(index);
+    }
+
+    public void addTile(int index, Tile tile) {
+        playerHand.add(index, tile);
     }
 }
