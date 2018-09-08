@@ -20,6 +20,7 @@ public class TileManager {
     private String lastAction;
     private int lastIndexClicked;
     private int lastRelativeLocation;
+    private boolean endOfTurn;
 
     public TileManager() {
         newGame();
@@ -76,6 +77,11 @@ public class TileManager {
         display.placeTile(tilePool.peek(), "tilePool");
     }
 
+    /**
+     * Takes an action and a clickCounter and handles its appropriate action
+     * @param actionPerformed The action that was performed
+     * @param clickCounter Counts if it was the first or second action to happen. Important for certain actions
+     */
     public void handleAction(String actionPerformed, int clickCounter) {
 
         //System.out.println("actionClicked = " + display.getActionClicked() + " actionPerformed = " + display.getActionPerformed());
