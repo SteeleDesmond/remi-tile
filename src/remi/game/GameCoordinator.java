@@ -5,6 +5,8 @@ import remi.mainApp;
 import remi.player.ComputerPlayer;
 import remi.tile.TileManager;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class GameCoordinator {
 
     private ComputerPlayer cp = new ComputerPlayer();
@@ -31,9 +33,11 @@ public class GameCoordinator {
             }
         }
         else if(status.isComputerPlayersTurn()) {
-//            tileManager.handleAction("tilePoolClicked", 1, false);
-//            tileManager.handleAction("playerTwoHandClicked", 1, false);
-//            tileManager.handleAction("playerTwoDiscardClicked", 2, false);
+            tileManager.handleAction("tilePoolClicked", false);
+
+            tileManager.setPcIndexClicked(ThreadLocalRandom.current().nextInt(0, 13));
+            tileManager.handleAction("playerTwoHandClicked", false);
+            tileManager.handleAction("playerTwoDiscardClicked", false);
             if(tileManager.isEndOfTurn()) {
                 System.out.println("End of computer turn");
                 status.setComputerPlayersTurn(false);
