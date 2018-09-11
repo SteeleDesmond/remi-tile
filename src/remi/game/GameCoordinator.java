@@ -33,8 +33,9 @@ public class GameCoordinator {
             }
         }
         else if(status.isComputerPlayersTurn()) {
+            /*Draw a card*/
             tileManager.handleAction("tilePoolClicked", false);
-
+            /*Discard a random card*/
             tileManager.setPcIndexClicked(ThreadLocalRandom.current().nextInt(0, 13));
             tileManager.handleAction("playerTwoHandClicked", false);
             tileManager.handleAction("playerTwoDiscardClicked", false);

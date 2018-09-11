@@ -98,7 +98,7 @@ public class TileManager {
     }
 
     /**
-     * Takes an action and a player and handles its appropriate action
+     * Takes an action and a player and handles its appropriate action. Encompasses game logic
      * @param actionPerformed The action that was performed
      * @param isHuman If it is a human player or not
      */
@@ -131,7 +131,7 @@ public class TileManager {
         /* Draw from tile pool
          * If this is the first click and it's the tile pool that is clicked, then add the tile to the player's hand.
          * Reset the click counter*/
-        if(actionPerformed.equals("tilePoolClicked") && clickCounter == 1 && (!drewACard)) {
+        if(actionPerformed.equals("tilePoolClicked") && clickCounter == 1 && !drewACard) {
             //System.out.println(tilePool.size());
             clickCounter = 0;
             drewACard = true;
@@ -149,7 +149,7 @@ public class TileManager {
         /* Human draws from the computer's discard pile
          * If the first click is player two's discard then add the top tile to player one's hand.
          * Reset the click counter*/
-        if(actionPerformed.equals("playerTwoDiscardClicked") && clickCounter == 1 && isHuman) {
+        if(actionPerformed.equals("playerTwoDiscardClicked") && clickCounter == 1 && isHuman && !drewACard) {
             clickCounter = 0;
             drewACard = true;
             moveTile(playerTwoDiscard.peek(), "playerTwoDiscard", "playerOneHand");
@@ -160,7 +160,7 @@ public class TileManager {
         }
         /* Computer draws from the computer's discard pile
          * Do the same as previous if player one's discard is clicked by cpu */
-        if(actionPerformed.equals("playerOneDiscardClicked") && clickCounter == 1 && !isHuman) {
+        if(actionPerformed.equals("playerOneDiscardClicked") && clickCounter == 1 && !isHuman && !drewACard) {
             clickCounter = 0;
             drewACard = true;
             moveTile(playerOneDiscard.peek(), "playerOneDiscard", "playerTwoHand");
@@ -173,7 +173,9 @@ public class TileManager {
         /* If this is the second click, reset the click counter*/
         if (clickCounter >= 2) {
             clickCounter = 0;
-            playerOneHand.getTile(lastIndexClicked).setSelected(false);
+            if(lastIndexClicked < 14) {
+                playerOneHand.getTile(lastIndexClicked).setSelected(false);
+            }
 
             /* Player one's hand --> player one's discard
              * If the first click is player one's hand and the second click is player one's discard,
@@ -199,23 +201,28 @@ public class TileManager {
                 discardedACard = true;
             }
 
-//            if(lastAction.equals("playerOneHandClicked") && actionPerformed.equals("playerOneHandClicked")) {
-//
-//                Tile tempTile = playerOneHand.getTile(lastIndexClicked);
-//                display.removeTile(playerOneHand.getTile(lastIndexClicked), "playerOneHand");
-//                playerOneHand.removeTile(lastIndexClicked);
-//
-//                if(display.getRelativeTileLocation() >= 30) {
-//                    playerOneHand.addTile(display.getTileIndexClicked() + 1, tempTile);
-//                    display.setTileClickedIndex(display.getTileIndexClicked() + 1);
-//                    display.placeTile(tempTile, "playerOneHand");
-//                }
-//                else {
-//                    playerOneHand.addTile((display.getTileIndexClicked()) - 1, tempTile);
+            /* Move the location of the card in the hand*/
+            if(lastAction.equals("playerOneHandClicked") && actionPerformed.equals("playerOneHandClicked")) {
+
+                display.setHandIndexClicked(true);
+                Tile tileToMove = playerOneHand.getTile(lastIndexClicked);
+                playerOneHand.removeTile(tileToMove);
+                display.removeTile(tileToMove, "playerOneHand");
+
+                /* If the player clicked on the right side or the center of the second card, place the last card to the
+                 * right of the second card clicked. Checks the hand's bounds */
+                if(display.getRelativeTileLocation() >= 30 && display.getTileIndexClicked() < 13
+                                                           || display.getTileIndexClicked() == 0) {
+                    playerOneHand.addTile(display.getTileIndexClicked() + 1, tileToMove);
+                    //display.setTileClickedIndex(display.getTileIndexClicked() + 1);
+                    display.placeTile(tileToMove, "playerOneHand");
+                }
+                else {
+                    playerOneHand.addTile((display.getTileIndexClicked()) - 1, tileToMove);
 //                    display.setTileClickedIndex(display.getTileIndexClicked() - 1);
-//                    display.placeTile(tempTile, "playerOneHand");
-//                }
-//            }
+                    display.placeTile(tileToMove, "playerOneHand");
+                }
+            }
         }
 
         /* If the player drew a card and discarded a card then end their turn*/

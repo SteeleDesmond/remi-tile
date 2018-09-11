@@ -32,6 +32,7 @@ public class DisplayController {
     private int relativeTileLocation;
     private int tileClickedIndex;
     private boolean actionClicked;
+    private boolean handIndexClicked;
     private String actionPerformed;
     private Tile[] deckTiles = new Tile[3];
 
@@ -53,12 +54,14 @@ public class DisplayController {
                 break;
             case "playeronehand":
                 /*If there is an action click then place the tile at the tile clicked index */
-//                if(actionClicked) {
-//                    playerOneHand.getChildren().add(tileClickedIndex, tile.getPane());
-//                }
-//                else {
+                if(handIndexClicked) {
+                    handIndexClicked = false;
+                    playerOneHand.getChildren().add(tileClickedIndex, tile.getPane());
+                }
+                /*Else add it to the end of the hand*/
+                else {
                     playerOneHand.getChildren().add(tile.getPane());
-//                }
+                }
                 break;
             case "playertwohand":
                 playerTwoHand.getChildren().add(tile.getPane());
@@ -178,11 +181,7 @@ public class DisplayController {
 
         actionClicked = true;
         actionPerformed = "playerOneHandClicked";
-        //System.out.println("actionClicked = " + actionClicked + " actionPerformed = " + actionPerformed);
-
-        //System.out.println(e.getX());
         tileClickedIndex = (int) e.getX() / (int) reference.getWidth();
-        //System.out.println(tileClickedIndex);
         relativeTileLocation = (int) e.getX() % (int) reference.getWidth();
     }
 
@@ -190,21 +189,18 @@ public class DisplayController {
     private void playerTwoDiscardClicked(MouseEvent e) {
         actionClicked = true;
         actionPerformed = "playerTwoDiscardClicked";
-        //System.out.println("actionClicked = " + actionClicked + " actionPerformed = " + actionPerformed);
     }
 
     @FXML
     private void playerOneDiscardClicked(MouseEvent e) {
         actionClicked = true;
         actionPerformed = "playerOneDiscardClicked";
-        //System.out.println("actionClicked = " + actionClicked + " actionPerformed = " + actionPerformed);
     }
 
     @FXML
     private void tilePoolClicked(MouseEvent e) {
         actionClicked = true;
         actionPerformed = "tilePoolClicked";
-        //System.out.println("actionClicked = " + actionClicked + " actionPerformed = " + actionPerformed);
     }
 
     public String getActionPerformed() {
@@ -233,6 +229,14 @@ public class DisplayController {
 
     public void setTileClickedIndex(int index) {
         tileClickedIndex = index;
+    }
+
+    public boolean isHandIndexClicked() {
+        return handIndexClicked;
+    }
+
+    public void setHandIndexClicked(boolean handIndexClicked) {
+        this.handIndexClicked = handIndexClicked;
     }
 
     /**
