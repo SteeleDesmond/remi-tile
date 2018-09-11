@@ -33,7 +33,6 @@ public class DisplayController {
     private int tileClickedIndex;
     private boolean actionClicked;
     private String actionPerformed;
-    private int clickCounter = 0;
     private Tile[] deckTiles = new Tile[3];
 
     @FXML
@@ -177,7 +176,6 @@ public class DisplayController {
     private void playerOneHandClicked(MouseEvent e) {
         Rectangle reference = (Rectangle) tilePool.getChildren().get(0);
 
-        clickCounter++;
         actionClicked = true;
         actionPerformed = "playerOneHandClicked";
         //System.out.println("actionClicked = " + actionClicked + " actionPerformed = " + actionPerformed);
@@ -190,7 +188,6 @@ public class DisplayController {
 
     @FXML
     private void playerTwoDiscardClicked(MouseEvent e) {
-        clickCounter++;
         actionClicked = true;
         actionPerformed = "playerTwoDiscardClicked";
         //System.out.println("actionClicked = " + actionClicked + " actionPerformed = " + actionPerformed);
@@ -198,7 +195,6 @@ public class DisplayController {
 
     @FXML
     private void playerOneDiscardClicked(MouseEvent e) {
-        clickCounter++;
         actionClicked = true;
         actionPerformed = "playerOneDiscardClicked";
         //System.out.println("actionClicked = " + actionClicked + " actionPerformed = " + actionPerformed);
@@ -206,7 +202,6 @@ public class DisplayController {
 
     @FXML
     private void tilePoolClicked(MouseEvent e) {
-        clickCounter++;
         actionClicked = true;
         actionPerformed = "tilePoolClicked";
         //System.out.println("actionClicked = " + actionClicked + " actionPerformed = " + actionPerformed);
@@ -226,14 +221,6 @@ public class DisplayController {
 
     public void setActionPerformed(String action) {
         actionPerformed = action;
-    }
-
-    public int getClickCounter() {
-        return clickCounter;
-    }
-
-    public void setClickCounter(int amount) {
-        clickCounter = amount;
     }
 
     public int getTileIndexClicked() {

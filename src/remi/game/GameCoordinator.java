@@ -21,19 +21,25 @@ public class GameCoordinator {
 
         if(status.isPlayerOnesTurn()) {
             if(display.getActionClicked()) {
-                tileManager.handleAction(display.getActionPerformed(), display.getClickCounter());
-//                if(tileManager.endOfTurn) {
-                    status.setPlayerOnesTurn(true);
+                tileManager.handleAction(display.getActionPerformed(), true);
+                if(tileManager.isEndOfTurn()) {
+                    System.out.println("End of human turn");
+                    status.setPlayerOnesTurn(false);
                     status.setComputerPlayersTurn(true);
-//                }
+                    tileManager.setEndOfTurn(false);
+                }
             }
         }
         else if(status.isComputerPlayersTurn()) {
-            tileManager.handleAction("tilePoolClicked", 1);
-            tileManager.handleAction("playerTwoHandClicked", 1);
-            tileManager.handleAction("playerTwoDiscardClicked", 2);
-            status.setComputerPlayersTurn(false);
-            status.setPlayerOnesTurn(true);
+//            tileManager.handleAction("tilePoolClicked", 1, false);
+//            tileManager.handleAction("playerTwoHandClicked", 1, false);
+//            tileManager.handleAction("playerTwoDiscardClicked", 2, false);
+            if(tileManager.isEndOfTurn()) {
+                System.out.println("End of computer turn");
+                status.setComputerPlayersTurn(false);
+                status.setPlayerOnesTurn(true);
+                tileManager.setEndOfTurn(false);
+            }
         }
     }
 }
