@@ -2,48 +2,43 @@ package remi.game;
 
 import remi.display.DisplayController;
 import remi.mainApp;
-import remi.player.ComputerPlayer;
 import remi.tile.TileManager;
-
-import java.util.concurrent.ThreadLocalRandom;
 
 public class GameCoordinator {
 
-    private ComputerPlayer cp = new ComputerPlayer();
     private TileManager tileManager;
     private DisplayController display = mainApp.getDisplayController();
     private GameStatus status = new GameStatus();
+    private Player players = new Player();
 
     public GameCoordinator() {
-        tileManager = new TileManager();
+
+        //tileManager = new TileManager();
     }
 
 
     public void start() {
 
         if(status.isPlayerOnesTurn()) {
+
+            /* Wait for input from the player */
             if(display.getActionClicked()) {
-                tileManager.handleAction(display.getActionPerformed(), true);
-                if(tileManager.isEndOfTurn()) {
+                players.handleAction(true);
+                if(players.isEndOfTurn()) {
                     System.out.println("End of human turn");
                     status.setPlayerOnesTurn(false);
                     status.setComputerPlayersTurn(true);
-                    tileManager.setEndOfTurn(false);
+                    players.setEndOfTurn(false);
                 }
             }
         }
         else if(status.isComputerPlayersTurn()) {
-            /*Draw a card*/
-            tileManager.handleAction("tilePoolClicked", false);
-            /*Discard a random card*/
-            tileManager.setPcIndexClicked(ThreadLocalRandom.current().nextInt(0, 13));
-            tileManager.handleAction("playerTwoHandClicked", false);
-            tileManager.handleAction("playerTwoDiscardClicked", false);
-            if(tileManager.isEndOfTurn()) {
+            players.makeAMove();
+            if(players.isEndOfTurn()) {
                 System.out.println("End of computer turn");
                 status.setComputerPlayersTurn(false);
                 status.setPlayerOnesTurn(true);
-                tileManager.setEndOfTurn(false);
+                players.setEndOfTurn(false);
             }
         }
     }
