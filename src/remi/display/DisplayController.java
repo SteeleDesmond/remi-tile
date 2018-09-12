@@ -34,7 +34,6 @@ public class DisplayController {
     private boolean actionClicked;
     private boolean handIndexClicked;
     private String actionPerformed;
-    private Tile[] deckTiles = new Tile[3];
 
     @FXML
     private void initialize() {
@@ -50,7 +49,6 @@ public class DisplayController {
         switch(location) {
             case "tilepool":
                 tilePool.getChildren().add(tile.getPane());
-                deckTiles[0] = tile;
                 break;
             case "playeronehand":
                 /*If there is an action click then place the tile at the tile clicked index */
@@ -71,16 +69,12 @@ public class DisplayController {
                 break;
             case "playeronediscard":
                 playerOneDiscard.getChildren().add(tile.getPane());
-                deckTiles[1] = tile;
                 break;
             case "playertwodiscard":
                 playerTwoDiscard.getChildren().add(tile.getPane());
-                deckTiles[2] = tile;
                 break;
 
         }
-//        newTile.getPane().setLayoutX(20);
-//        newTile.getPane().setLayoutY(20);
     }
 
     /**
@@ -124,7 +118,6 @@ public class DisplayController {
                 break;
         }
     }
-
 
     /**
      *

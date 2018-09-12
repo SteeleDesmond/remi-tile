@@ -1,44 +1,46 @@
 package remi.game;
 
-import remi.display.DisplayController;
-import remi.mainApp;
-import remi.tile.TileManager;
+import remi.player.ComputerPlayer;
+import remi.player.Player;
 
 public class GameCoordinator {
 
-    private TileManager tileManager;
-    private DisplayController display = mainApp.getDisplayController();
     private GameStatus status = new GameStatus();
-    private Player players = new Player();
-
-    public GameCoordinator() {
-
-        //tileManager = new TileManager();
-    }
-
+    private GameScore score = new GameScore();
+    private GameRules rules = new GameRules();
+    private Player playerOne = new Player();
+    private ComputerPlayer computer = new ComputerPlayer();
 
     public void start() {
 
         if(status.isPlayerOnesTurn()) {
-
             /* Wait for input from the player */
-            if(display.getActionClicked()) {
-                players.handleAction(true);
-                if(players.isEndOfTurn()) {
+            if(playerOne.getAction()) {
+                playerOne.handleAction(true);
+                if(playerOne.isEndOfTurn()) {
                     System.out.println("End of human turn");
+                    rules.isSet();
                     status.setPlayerOnesTurn(false);
                     status.setComputerPlayersTurn(true);
-                    players.setEndOfTurn(false);
+                    playerOne.setEndOfTurn(false);
+                    if(rules.gameIsOver()) {
+                        score.updateScore(rules.getWinner(), -50);
+                        score.updateScore(rules.getLoser(), rules.getLoserScore());
+                    }
                 }
             }
         }
         else if(status.isComputerPlayersTurn()) {
-            players.makeAMove();
-            if(players.isEndOfTurn()) {
+            computer.makeAMove();
+            if(computer.isEndOfTurn()) {
                 System.out.println("End of computer turn");
                 status.setComputerPlayersTurn(false);
                 status.setPlayerOnesTurn(true);
-                players.setEndOfTurn(false);
+                computer.setEndOfTurn(false);
+                if(rules.gameIsOver()) {
+                    score.updateScore(rules.getWinner(), -50);
+                    score.updateScore(rules.getLoser(), rules.getLoserScore());
+                }
             }
         }
     }

@@ -44,6 +44,8 @@ public class mainApp extends Application {
         a.start();
     }
 
+    /* A single display controller is used to interact with the display files. Necessary to avoid any parallel
+     * instantiation issues with JavaFX and multiple fxml files*/
     public static DisplayController getDisplayController() {
         return controller;
     }

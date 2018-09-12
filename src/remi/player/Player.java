@@ -1,10 +1,12 @@
-package remi.game;
+package remi.player;
 
+import javafx.animation.AnimationTimer;
 import remi.display.DisplayController;
 import remi.mainApp;
 import remi.tile.Tile;
 import remi.tile.TileManager;
 
+import java.time.Duration;
 import java.util.concurrent.ThreadLocalRandom;
 
 
@@ -14,7 +16,7 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class Player {
 
-    private TileManager tm;
+    private static TileManager tm = new TileManager();
     private DisplayController display = mainApp.getDisplayController();
 
     private String actionPerformed;
@@ -27,8 +29,9 @@ public class Player {
     private boolean discardedATile = false;
     private boolean endOfTurn = false;
 
-    public Player() {
-        tm = new TileManager();
+    /* There is a single set of game tiles for the game that is managed by the TileManager and is used by the Players.*/
+    public static TileManager getGameTiles() {
+        return tm;
     }
 
     /**
@@ -208,15 +211,15 @@ public class Player {
         this.pcIndexClicked = pcIndexClicked;
     }
 
-    public void makeAMove() {
-        /*Draw a card*/
-        actionPerformed = "tilePoolClicked";
-        handleAction( false);
-        /*Discard a random card*/
-        setPcIndexClicked(ThreadLocalRandom.current().nextInt(0, 13));
-        actionPerformed = "playerTwoHandClicked";
-        handleAction(false);
-        actionPerformed = "playerTwoDiscardClicked";
-        handleAction(false);
+    public boolean getAction() {
+        return display.getActionClicked();
+    }
+
+    public String getActionPerformed() {
+        return actionPerformed;
+    }
+
+    public void setActionPerformed(String actionPerformed) {
+        this.actionPerformed = actionPerformed;
     }
 }
