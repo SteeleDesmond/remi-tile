@@ -21,4 +21,9 @@ public class GameStatus {
         isComputerPlayersTurn = computerPlayersTurn;
     }
 
+    public void newGame() {
+        isPlayerOnesTurn = true;
+        isComputerPlayersTurn = false;
+    }
+
 }

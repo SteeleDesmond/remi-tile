@@ -14,4 +14,9 @@ public class GameScore {
     public void updateScore(String player, int value) {
         display.updateScore(player, value);
     }
+
+    public void newGame() {
+        display.updateScore("playerOne", 0);
+        display.updateScore("playerTwo", 0);
+    }
 }

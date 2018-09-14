@@ -27,6 +27,7 @@ public class DisplayController {
     private int tileClickedIndex;
     private boolean actionClicked;
     private boolean handIndexClicked;
+    private boolean clickedReset;
     private String actionPerformed;
 
     @FXML
@@ -226,6 +227,14 @@ public class DisplayController {
         this.handIndexClicked = handIndexClicked;
     }
 
+    public boolean isClickedReset() {
+        return clickedReset;
+    }
+
+    public void setClickedReset(boolean clickedReset) {
+        this.clickedReset = clickedReset;
+    }
+
     /**
      * Opens the helpWindow file with the game rules. Called when the help button is clicked
      */
@@ -237,5 +246,10 @@ public class DisplayController {
         stage.setTitle("Help");
         stage.setScene(new Scene(helpPane, 600, 400));
         stage.show();
+    }
+
+    @FXML
+    private void resetAction() {
+        clickedReset = true;
     }
 }

@@ -46,7 +46,26 @@ public class TileManager {
      */
     public void newGame() {
 
-        // Note: Might have to remove all painted tiles off of the game board for this to work.
+        // Remove all painted tiles off from the game board
+        if(tilePool.size() > 1) {
+            for(int i = 0; i < playerOneHand.size(); i++) {
+                display.removeTile(playerOneHand.getTile(i), "playerOneHand");
+            }
+            for(int i = 0; i < playerTwoHand.size(); i++) {
+                display.removeTile(playerTwoHand.getTile(i), "playerTwoHand");
+            }
+            while(!playerOneDiscard.isEmpty()) {
+                display.removeTile(playerOneDiscard.pop(), "playerOneDiscard");
+            }
+            while(!playerTwoDiscard.isEmpty()) {
+                display.removeTile(playerTwoDiscard.pop(), "playerTwoDiscard");
+            }
+            playerOneHand.clear();
+            playerTwoHand.clear();
+            playerOneDiscard.clear();
+            playerTwoDiscard.clear();
+        }
+
         tilePool.newTileSet();
 
         for (int i = 0; i < 14; i++) {

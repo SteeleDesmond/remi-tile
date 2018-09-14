@@ -224,4 +224,12 @@ public class Player {
     public void setActionPerformed(String actionPerformed) {
         this.actionPerformed = actionPerformed;
     }
+
+    public boolean clickedReset() {
+        return display.isClickedReset();
+    }
+
+    public void setReset(boolean value) {
+        display.setClickedReset(value);
+    }
 }

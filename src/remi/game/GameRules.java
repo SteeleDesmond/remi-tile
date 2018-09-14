@@ -6,7 +6,7 @@ import remi.tile.TilePool;
 
 /**
  * Contains logic to check if the game has a winner or not. There are 3 code blocks commented out that can be used to
- * test win detection for a basic case.
+ * test win detection for a basic case. The test doesn't test the actual game pieces or scores.
  */
 public class GameRules {
 
@@ -43,7 +43,17 @@ public class GameRules {
     }
 
     private void calculateLoserScore(PlayerHand hand) {
+        for(int i = 0; i < hand.size(); i++) {
+            loserScore += hand.getTile(i).getNumber();
+        }
+    }
 
+    public void reset() {
+        winner = null;
+        loser = null;
+        gameIsOver = false;
+        loserScore = 0;
+        setSize = 0;
     }
 
     /**
@@ -133,7 +143,7 @@ public class GameRules {
      * @param hand The hand that is to be tested for a win
      */
     public void checkForWin(PlayerHand hand) {
-//        /*Uncomment for testing win detection*/
+        /*Uncomment for testing win detection*/
 //        /*------------------------------------------------------*/
 //        hand = makeDummyHand();
 //        System.out.println("Player's Hand: ");
@@ -153,7 +163,7 @@ public class GameRules {
             /*If true then it is a run*/
             else if(isRun(hand.subList(i, hand.size())) > 2) {
                 /*Skip ahead in the loop to skip over the set. Subtract 1 as i increments by 1 already*/
-                i += setSize;
+                i += setSize - 1;
             }
             /*Otherwise it is not a win so return*/
             else {
@@ -184,14 +194,14 @@ public class GameRules {
     private PlayerHand makeDummyHand() {
 
         PlayerHand dummyHand = new PlayerHand();
-        dummyHand.addTile(new Tile(1, "Blue", false));
-        dummyHand.addTile(new Tile(1, "Red", false));
-        dummyHand.addTile(new Tile(1, "Green", false));
-        dummyHand.addTile(new Tile(1, "Yellow", false));
 
         for(int i = 3; i < 13; i++) {
             dummyHand.addTile(new Tile(i, "Red", false));
         }
+        dummyHand.addTile(new Tile(1, "Blue", false));
+        dummyHand.addTile(new Tile(1, "Red", false));
+        dummyHand.addTile(new Tile(1, "Green", false));
+        dummyHand.addTile(new Tile(1, "Yellow", false));
         return dummyHand;
     }
 }

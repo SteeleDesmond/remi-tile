@@ -42,4 +42,8 @@ public class PlayerHand {
         }
         return subList;
     }
+
+    public void clear() {
+        playerHand.clear();
+    }
 }

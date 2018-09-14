@@ -28,4 +28,8 @@ public class DiscardPile {
     public boolean isEmpty() {
         return discardPile.isEmpty();
     }
+
+    public void clear() {
+        discardPile.clear();
+    }
 }
