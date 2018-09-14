@@ -1,16 +1,23 @@
 package remi.game;
 
 import remi.player.Player;
+import remi.tile.PlayerHand;
 import remi.tile.Tile;
 import remi.tile.TileManager;
 
 public class GameRules {
 
-    private TileManager tm = Player.getGameTiles();
+    private PlayerHand playerOneHand;
+    private PlayerHand playerTwoHand;
     private String winner;
     private String loser;
     private boolean gameIsOver = false;
     private int loserScore;
+
+    public GameRules(PlayerHand playerOneHand, PlayerHand playerTwoHand) {
+        this.playerOneHand = playerOneHand;
+        this.playerTwoHand = playerTwoHand;
+    }
 
     /*Checks if the game is over and returns whether it is or not*/
     public boolean gameIsOver() {

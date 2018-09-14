@@ -1,8 +1,15 @@
 package remi.player;
 
+import remi.display.DisplayController;
+import remi.tile.TileManager;
+
 import java.util.concurrent.ThreadLocalRandom;
 
 public class ComputerPlayer extends Player {
+
+    public ComputerPlayer(DisplayController display, TileManager tm) {
+        super(display, tm);
+    }
 
     /*Simple computer player functionality*/
     public void makeAMove() {

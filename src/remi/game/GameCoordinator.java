@@ -1,15 +1,19 @@
 package remi.game;
 
+import remi.display.DisplayController;
+import remi.mainApp;
 import remi.player.ComputerPlayer;
 import remi.player.Player;
+import remi.tile.TileManager;
 
 public class GameCoordinator {
 
+    private TileManager tm = new TileManager(mainApp.getDisplayController());
     private GameStatus status = new GameStatus();
     private GameScore score = new GameScore();
-    private GameRules rules = new GameRules();
-    private Player playerOne = new Player();
-    private ComputerPlayer computer = new ComputerPlayer();
+    private GameRules rules = new GameRules(tm.getPlayerOneHand(), tm.getPlayerTwoHand());
+    private Player playerOne = new Player(mainApp.getDisplayController(), tm);
+    private ComputerPlayer computer = new ComputerPlayer(mainApp.getDisplayController(), tm);
 
     public void start() {
 

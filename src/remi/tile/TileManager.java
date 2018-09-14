@@ -10,17 +10,38 @@ import static java.util.Collections.shuffle;
  */
 public class TileManager {
 
-    private DisplayController display = mainApp.getDisplayController();
+    private DisplayController display;
+    private TilePool tilePool = new TilePool();
+    private PlayerHand playerOneHand = new PlayerHand();
+    private PlayerHand playerTwoHand = new PlayerHand();
+    private DiscardPile playerOneDiscard = new DiscardPile();
 
-    public TilePool tilePool = new TilePool();
-    public PlayerHand playerOneHand = new PlayerHand();
-    public PlayerHand playerTwoHand = new PlayerHand();
-    public DiscardPile playerOneDiscard = new DiscardPile();
-    public DiscardPile playerTwoDiscard = new DiscardPile();
-
-    public TileManager() {
+    public TileManager(DisplayController display) {
+        this.display = display;
         newGame();
     }
+
+    public TilePool getTilePool() {
+        return tilePool;
+    }
+
+    public PlayerHand getPlayerOneHand() {
+        return playerOneHand;
+    }
+
+    public PlayerHand getPlayerTwoHand() {
+        return playerTwoHand;
+    }
+
+    public DiscardPile getPlayerOneDiscard() {
+        return playerOneDiscard;
+    }
+
+    public DiscardPile getPlayerTwoDiscard() {
+        return playerTwoDiscard;
+    }
+
+    private DiscardPile playerTwoDiscard = new DiscardPile();
 
     /**
      * Generate new tiles and load the set of tiles into the tile pool. Deal 14 tiles to each player's hand. Show the
