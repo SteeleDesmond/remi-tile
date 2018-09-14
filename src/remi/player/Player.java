@@ -159,7 +159,7 @@ public class Player {
          * If the first click is player one's hand and the second click is player one's discard,
          * then add the first card clicked to the discard pile*/
         if(lastAction.equals("playerOneHandClicked") && actionPerformed.equals("playerOneDiscardClicked")
-                                                     && !discardedATile && isHuman) {
+                                                     && !discardedATile && isHuman && drewATile) {
             playerOneDiscard.push(playerOneHand.getTile(display.getTileIndexClicked()));
             playerOneHand.removeTile(display.getTileIndexClicked());
             display.placeTile(playerOneDiscard.peek(), "playerOneDiscard");
@@ -231,5 +231,17 @@ public class Player {
 
     public void setReset(boolean value) {
         display.setClickedReset(value);
+    }
+
+    public void clearHand(PlayerHand hand) {
+        for(int i = 0; i < hand.size(); i++) {
+            display.removeTile(hand.getTile(i), "playerTwoHand");
+        }
+    }
+
+    public void fillHand(PlayerHand hand) {
+        for(int i = 0; i < hand.size(); i++) {
+            display.placeTile(hand.getTile(i), "playerTwoHand");
+        }
     }
 }

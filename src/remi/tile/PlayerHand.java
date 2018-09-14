@@ -1,6 +1,8 @@
 package remi.tile;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -45,5 +47,10 @@ public class PlayerHand {
 
     public void clear() {
         playerHand.clear();
+    }
+
+    public void sort() {
+        playerHand.sort(Comparator.comparing(Tile::getNumber));
+        playerHand.sort(Comparator.comparing(Tile::getColor));
     }
 }

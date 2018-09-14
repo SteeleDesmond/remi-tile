@@ -22,6 +22,7 @@ public class GameCoordinator {
                 tm.newGame();
                 score.newGame();
                 status.newGame();
+                rules.reset();
                 playerOne.setReset(false);
             }
             if(playerOne.getAction()) {
@@ -31,17 +32,22 @@ public class GameCoordinator {
                     status.setPlayerOnesTurn(false);
                     status.setComputerPlayersTurn(true);
                     playerOne.setEndOfTurn(false);
+                    /*If playerOne wins, reset the board and set the scores*/
                     if(rules.gameIsOver()) {
                         System.out.println("Player One Wins!");
                         score.updateScore(rules.getWinner(), -50);
                         score.updateScore(rules.getLoser(), rules.getLoserScore());
+                        tm.newGame();
                         rules.reset();
+                        status.newGame();
                     }
                 }
             }
         }
         else if(status.isComputerPlayersTurn()) {
+            /*Process is same as player one except computer automatically makes a move and reorganizes its hand*/
             computer.makeAMove();
+            computer.sortHand();
             if(computer.isEndOfTurn()) {
                 System.out.println("End of computer turn");
                 status.setComputerPlayersTurn(false);
@@ -52,7 +58,9 @@ public class GameCoordinator {
                     System.out.println("Computer Wins!");
                     score.updateScore(rules.getWinner(), -50);
                     score.updateScore(rules.getLoser(), rules.getLoserScore());
+                    tm.newGame();
                     rules.reset();
+                    status.newGame();
                 }
             }
         }
