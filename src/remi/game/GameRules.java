@@ -1,9 +1,6 @@
 package remi.game;
 
-import remi.player.Player;
 import remi.tile.PlayerHand;
-import remi.tile.Tile;
-import remi.tile.TileManager;
 
 public class GameRules {
 

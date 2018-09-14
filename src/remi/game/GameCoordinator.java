@@ -1,6 +1,5 @@
 package remi.game;
 
-import remi.display.DisplayController;
 import remi.mainApp;
 import remi.player.ComputerPlayer;
 import remi.player.Player;

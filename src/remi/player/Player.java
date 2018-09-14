@@ -1,13 +1,7 @@
 package remi.player;
 
-import javafx.animation.AnimationTimer;
 import remi.display.DisplayController;
-import remi.mainApp;
 import remi.tile.*;
-
-import java.time.Duration;
-import java.util.concurrent.ThreadLocalRandom;
-
 
 /**
  * Takes input from input the display and coordinates where tiles should go. Organizes tiles in the TileManager.

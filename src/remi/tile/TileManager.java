@@ -1,9 +1,6 @@
 package remi.tile;
 
 import remi.display.DisplayController;
-import remi.mainApp;
-
-import static java.util.Collections.shuffle;
 
 /**
  * Manage the two discard piles, the player hands, and the tile pool for the game

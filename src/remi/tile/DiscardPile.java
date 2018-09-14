@@ -1,6 +1,5 @@
 package remi.tile;
 
-import java.util.ArrayList;
 import java.util.Stack;
 
 /**
