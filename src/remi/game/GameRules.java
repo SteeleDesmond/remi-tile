@@ -4,6 +4,10 @@ import remi.tile.PlayerHand;
 import remi.tile.Tile;
 import remi.tile.TilePool;
 
+/**
+ * Contains logic to check if the game has a winner or not. There are 3 code blocks commented out that can be used to
+ * test win detection for a basic case.
+ */
 public class GameRules {
 
     private PlayerHand playerOneHand;
@@ -14,28 +18,15 @@ public class GameRules {
     private int loserScore;
     private int setSize;
 
-    private PlayerHand dummyHand = new PlayerHand();
-
-
-
     public GameRules(PlayerHand playerOneHand, PlayerHand playerTwoHand) {
         this.playerOneHand = playerOneHand;
         this.playerTwoHand = playerTwoHand;
-
-        dummyHand.addTile(new Tile(1, "Blue", false));
-        dummyHand.addTile(new Tile(1, "Red", false));
-        dummyHand.addTile(new Tile(1, "Green", false));
-        dummyHand.addTile(new Tile(1, "Yellow", false));
-
-        for(int i = 3; i < 13; i++) {
-            dummyHand.addTile(new Tile(i, "Red", false));
-        }
     }
 
     /*Checks if the game is over and returns whether it is or not*/
     public boolean gameIsOver() {
         checkForWin(playerOneHand);
-        //checkForWin(playerTwoHand);
+        checkForWin(playerTwoHand);
         return gameIsOver;
     }
 
@@ -62,18 +53,20 @@ public class GameRules {
      * @return the size of the set. 3 to 4 is valid for the required rules
      */
     private int isSet(PlayerHand hand) {
-        /*------------------------------------------------------*/
-        System.out.printf("Set Sublist = ");
-        for(int i = 0; i < hand.size(); i++) {
-            System.out.printf("%d ", hand.getTile(i).getNumber());
-        }
-        System.out.println();
-        /*------------------------------------------------------*/
+//        /*Uncomment for testing win detection*/
+//        /*------------------------------------------------------*/
+//        System.out.printf("Set Sublist = ");
+//        for(int i = 0; i < hand.size(); i++) {
+//            System.out.printf("%d ", hand.getTile(i).getNumber());
+//        }
+//        System.out.println();
+//        /*------------------------------------------------------*/
+
         setSize = 0;
         if(hand.size() < 3) {
             return setSize;
         }
-
+        /*Made so that the if statements are shorter*/
         int num0 = hand.getTile(0).getNumber();
         int num1 = hand.getTile(1).getNumber();
         int num2 = hand.getTile(2).getNumber();
@@ -81,11 +74,13 @@ public class GameRules {
         String color1 = hand.getTile(1).getColor();
         String color2 = hand.getTile(2).getColor();
 
+        /* Compare the colors and numbers of the first 3 tiles*/
         if((num0 == num1 && !color0.equals(color1))
                 && (num0 == num2 && !color0.equals(color2) && !color1.equals(color2))) {
             setSize = 3;
         }
-        if(hand.size() > 3) {
+        /* If there the first 3 are a set and there is a 4th tile then check if it is in the set*/
+        if(setSize == 3 && hand.size() > 3) {
             int num3 = hand.getTile(3).getNumber();
             String color3 = hand.getTile(3).getColor();
 
@@ -103,15 +98,17 @@ public class GameRules {
      * @return the size of the run. Greater than 3 is valid for the required rules
      */
     private int isRun(PlayerHand hand) {
-        /*------------------------------------------------------*/
-        System.out.printf("Run Sublist = ");
-        for(int i = 0; i < hand.size(); i++) {
-            System.out.printf("%d ", hand.getTile(i).getNumber());
-        }
-        System.out.println();
-        /*------------------------------------------------------*/
+//        /*Uncomment for testing win detection*/
+//        /*------------------------------------------------------*/
+//        System.out.printf("Run Sublist = ");
+//        for(int i = 0; i < hand.size(); i++) {
+//            System.out.printf("%d ", hand.getTile(i).getNumber());
+//        }
+//        System.out.println();
+//        /*------------------------------------------------------*/
+
         int colorStreak = 0;
-        setSize = 0;
+        setSize = 1;
         if(hand.size() < 3) {
             return setSize;
         }
@@ -122,42 +119,40 @@ public class GameRules {
                 colorStreak++;
             }
         }
-        System.out.println("colorStreak = " + colorStreak);
         for(int i = 0; i < colorStreak - 1; i++) {
+            //System.out.println(i);
             if(hand.getTile(i).getNumber() == hand.getTile(i+1).getNumber() - 1) {
                 setSize++;
             }
         }
-
-        return setSize + 2;
+        return setSize;
     }
 
+    /**
+     *  Check if a hand is a winning hand
+     * @param hand The hand that is to be tested for a win
+     */
     public void checkForWin(PlayerHand hand) {
-        /*------------------------------------------------------*/
-        hand = dummyHand;
-        System.out.println("Player's Hand: ");
-        for(int i = 0; i < hand.size(); i++) {
-            System.out.printf("%d  ",hand.getTile(i).getNumber());
-        }
-        System.out.println();
-        System.out.println();
-        /*------------------------------------------------------*/
+//        /*Uncomment for testing win detection*/
+//        /*------------------------------------------------------*/
+//        hand = makeDummyHand();
+//        System.out.println("Player's Hand: ");
+//        for(int i = 0; i < hand.size(); i++) {
+//            System.out.printf("%d  ",hand.getTile(i).getNumber());
+//        }
+//        System.out.println();
+//        /*------------------------------------------------------*/
 
         for(int i = 0; i < hand.size(); i++) {
-            System.out.printf("i = %d\n", i);
 
             /*If true then it is a set*/
             if(isSet(hand.subList(i, hand.size())) > 2) {
                 /*Skip ahead in the loop to skip over the set. Subtract 1 as i increments by 1 already*/
-                System.out.println("setSize = " + setSize);
-                System.out.printf("Add %d to i increment\n", setSize - 1);
                 i += setSize - 1;
             }
             /*If true then it is a run*/
             else if(isRun(hand.subList(i, hand.size())) > 2) {
                 /*Skip ahead in the loop to skip over the set. Subtract 1 as i increments by 1 already*/
-                System.out.println("setSize = " + setSize);
-                System.out.printf("Add %d to i increment\n", setSize - 1);
                 i += setSize;
             }
             /*Otherwise it is not a win so return*/
@@ -179,5 +174,24 @@ public class GameRules {
             calculateLoserScore(playerOneHand);
         }
         gameIsOver = true;
+    }
+
+
+    /**
+     * Convenience method used for testing purposes
+     * @return a PlayerHand object with a winning hand under basic rules
+     */
+    private PlayerHand makeDummyHand() {
+
+        PlayerHand dummyHand = new PlayerHand();
+        dummyHand.addTile(new Tile(1, "Blue", false));
+        dummyHand.addTile(new Tile(1, "Red", false));
+        dummyHand.addTile(new Tile(1, "Green", false));
+        dummyHand.addTile(new Tile(1, "Yellow", false));
+
+        for(int i = 3; i < 13; i++) {
+            dummyHand.addTile(new Tile(i, "Red", false));
+        }
+        return dummyHand;
     }
 }
