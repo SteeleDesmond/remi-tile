@@ -8,9 +8,6 @@ public class TilePool {
 
     private ArrayList<Tile> tilePool = new ArrayList<>();
 
-    public TilePool() {
-    }
-
     public Tile peek() {
         return tilePool.get(tilePool.size() - 1);
     }

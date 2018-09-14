@@ -1,6 +1,7 @@
 package remi.tile;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * One instance for each player
@@ -8,9 +9,6 @@ import java.util.ArrayList;
 public class PlayerHand {
 
     private ArrayList<Tile> playerHand = new ArrayList<>();
-
-    public PlayerHand() {
-    }
 
     public Tile getTile(int index) {
         return playerHand.get(index);
@@ -34,5 +32,14 @@ public class PlayerHand {
 
     public void addTile(int index, Tile tile) {
         playerHand.add(index, tile);
+    }
+
+    public PlayerHand subList(int fromIndex, int toIndex) {
+
+        PlayerHand subList = new PlayerHand();
+        for(int i = fromIndex; i < toIndex; i++) {
+            subList.addTile(playerHand.get(i));
+        }
+        return subList;
     }
 }

@@ -40,10 +40,10 @@ public class GameCoordinator {
                 status.setPlayerOnesTurn(true);
                 computer.setEndOfTurn(false);
                 computer.sortHand();
-                if(rules.gameIsOver()) {
-                    score.updateScore(rules.getWinner(), -50);
-                    score.updateScore(rules.getLoser(), rules.getLoserScore());
-                }
+//                if(rules.gameIsOver()) {
+//                    score.updateScore(rules.getWinner(), -50);
+//                    score.updateScore(rules.getLoser(), rules.getLoserScore());
+//                }
             }
         }
     }
