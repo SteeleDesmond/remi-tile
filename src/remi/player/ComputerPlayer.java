@@ -17,4 +17,8 @@ public class ComputerPlayer extends Player {
         setActionPerformed("playerTwoDiscardClicked");
         handleAction(false);
     }
+
+    public void sortHand() {
+
+    }
 }

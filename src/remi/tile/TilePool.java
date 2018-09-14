@@ -33,7 +33,7 @@ public class TilePool {
 
         tilePool.clear();
         for (int j = 0; j < 2; j++) {
-            for (int i = 0; i < 13; i++) {
+            for (int i = 1; i < 14; i++) {
                 Tile newRedTile = new Tile(i, "Red", false);
                 Tile newBlueTile = new Tile(i, "Blue", false);
                 Tile newGreenTile = new Tile(i, "Green", false);
@@ -43,8 +43,8 @@ public class TilePool {
                 tilePool.add(newGreenTile);
                 tilePool.add(newYellowTile);
             }
-            Tile redJokerTile = new Tile(0, "Red", true);
-            Tile blueJokerTile = new Tile(0, "Blue", true);
+            Tile redJokerTile = new Tile(20, "Red", true);
+            Tile blueJokerTile = new Tile(20, "Blue", true);
             tilePool.add(redJokerTile);
             tilePool.add(blueJokerTile);
         }

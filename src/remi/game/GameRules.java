@@ -12,7 +12,9 @@ public class GameRules {
     private boolean gameIsOver = false;
     private int loserScore;
 
+    /*Checks if the game is over and returns whether it is or not*/
     public boolean gameIsOver() {
+        checkForWin();
         return gameIsOver;
     }
 
@@ -28,17 +30,20 @@ public class GameRules {
         return loserScore;
     }
 
+    public void calculateLoserScore() {
+
+    }
+
     public void isSet() {
 
-        for(int i = 0; i < tm.playerOneHand.size() - 1; i++) {
-            if(tm.playerOneHand.getTile(i).getNumber() == tm.playerOneHand.getTile(i+1).getNumber()
-                    && tm.playerOneHand.getTile(i).getNumber() == tm.playerOneHand.getTile(i-1).getNumber()) {
-                System.out.println("3 in a row");
-            }
-        }
+
     }
 
     public void isRun() {
+
+    }
+
+    public void checkForWin() {
 
     }
 }
