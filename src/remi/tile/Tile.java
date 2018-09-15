@@ -30,7 +30,14 @@ public class Tile {
         this.color = color.toLowerCase();
         this.isJoker = isJoker;
         this.id = nextId;
-        text = new Text(Integer.toString(number));
+
+        if(isJoker) {
+            text = new Text(";)");
+        }
+        else
+        {
+            text = new Text(Integer.toString(number));
+        }
         pane.getChildren().addAll(rectangle,text);
         showTile();
         nextId++;

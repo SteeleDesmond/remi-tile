@@ -83,21 +83,45 @@ public class GameRules {
         String color0 = hand.getTile(0).getColor();
         String color1 = hand.getTile(1).getColor();
         String color2 = hand.getTile(2).getColor();
+        boolean joker0 = hand.getTile(0).isJoker();
+        boolean joker1 = hand.getTile(1).isJoker();
+        boolean joker2 = hand.getTile(2).isJoker();
+
 
         /* Compare the colors and numbers of the first 3 tiles*/
         if((num0 == num1 && !color0.equals(color1))
                 && (num0 == num2 && !color0.equals(color2) && !color1.equals(color2))) {
             setSize = 3;
         }
-        /* If there the first 3 are a set and there is a 4th tile then check if it is in the set*/
+        /* If it still isn't a set check for joker cases*/
+        if(setSize < 3) {
+            if(joker0) {
+                if(num1 == num2 && !color1.equals(color2)) {
+                    setSize = 3;
+                }
+            }
+            if(joker1) {
+                if(num0 == num2 && !color0.equals(color2)) {
+                    setSize = 3;
+                }
+            }
+            if(joker2) {
+                if(num0 == num1 && !color0.equals(color1)) {
+                    setSize = 3;
+                }
+            }
+        }
+        /* If the first 3 are a set and there is a 4th tile then check if the 4th tile is in the set*/
         if(setSize == 3 && hand.size() > 3) {
             int num3 = hand.getTile(3).getNumber();
             String color3 = hand.getTile(3).getColor();
+            boolean joker3 = hand.getTile(3).isJoker();
 
-            if(num3 == num0 && !color3.equals(color0) && !color3.equals(color1) && !color3.equals(color2)) {
+            if(joker3 || (num3 == num0 && !color3.equals(color0) && !color3.equals(color1) && !color3.equals(color2))) {
                 setSize = 4;
             }
         }
+
         return setSize;
     }
 
@@ -125,13 +149,12 @@ public class GameRules {
 
         /*Get the size of same-color tiles in a row*/
         for(int i = 0; i < hand.size(); i++) {
-            if(hand.getTile(i).getColor().equals(hand.getTile(0).getColor())) {
+            if(hand.getTile(i).isJoker() || hand.getTile(i).getColor().equals(hand.getTile(0).getColor())) {
                 colorStreak++;
             }
         }
         for(int i = 0; i < colorStreak - 1; i++) {
-            //System.out.println(i);
-            if(hand.getTile(i).getNumber() == hand.getTile(i+1).getNumber() - 1) {
+            if(hand.getTile(i).isJoker() || hand.getTile(i).getNumber() == hand.getTile(i+1).getNumber() - 1) {
                 setSize++;
             }
         }

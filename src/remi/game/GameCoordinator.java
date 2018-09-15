@@ -28,13 +28,13 @@ public class GameCoordinator {
             if(playerOne.getAction()) {
                 playerOne.handleAction(true);
                 if(playerOne.isEndOfTurn()) {
-                    System.out.println("End of human turn");
+                    //System.out.println("End of human turn");
                     status.setPlayerOnesTurn(false);
                     status.setComputerPlayersTurn(true);
                     playerOne.setEndOfTurn(false);
                     /*If playerOne wins, reset the board and set the scores*/
                     if(rules.gameIsOver()) {
-                        System.out.println("Player One Wins!");
+                        //System.out.println("Player One Wins!");
                         score.updateScore(rules.getWinner(), -50);
                         score.updateScore(rules.getLoser(), rules.getLoserScore());
                         tm.newGame();
@@ -49,7 +49,7 @@ public class GameCoordinator {
             computer.makeAMove();
             computer.sortHand();
             if(computer.isEndOfTurn()) {
-                System.out.println("End of computer turn");
+                //System.out.println("End of computer turn");
                 status.setComputerPlayersTurn(false);
                 status.setPlayerOnesTurn(true);
                 computer.setEndOfTurn(false);
