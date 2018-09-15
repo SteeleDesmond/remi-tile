@@ -162,8 +162,13 @@ public class GameRules {
                 colorStreak++;
             }
         }
+        /*Compare each tile's number with the tile next to it and count the run size*/
         for(int i = 0; i < colorStreak - 1; i++) {
             if(hand.getTile(i).isJoker() || hand.getTile(i).getNumber() == hand.getTile(i+1).getNumber() - 1) {
+                setSize++;
+            }
+            /*If it is a 13 followed by a 1 it is also a valid run per the rules*/
+            if((hand.getTile(i).getNumber() == 13) && hand.getTile(i+1).getNumber() == 1) {
                 setSize++;
             }
         }
@@ -227,9 +232,10 @@ public class GameRules {
 
         PlayerHand dummyHand = new PlayerHand();
 
-        for(int i = 3; i < 13; i++) {
+        for(int i = 3; i < 12; i++) {
             dummyHand.addTile(new Tile(i, "Red", false));
         }
+        dummyHand.addTile(new Tile(2, "Red", true));
         dummyHand.addTile(new Tile(1, "Blue", false));
         dummyHand.addTile(new Tile(1, "Red", false));
         dummyHand.addTile(new Tile(1, "Green", false));

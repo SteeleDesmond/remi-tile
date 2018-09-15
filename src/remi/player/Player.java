@@ -146,6 +146,7 @@ public class Player {
         else if(actionPerformed.equals("playerOneDiscardClicked") && !isHuman) {
             clickCounter = 0;
             drewATile = true;
+            playerOneDiscard.peek().hideTile();
             tm.moveTile(playerOneDiscard.peek(), "playerOneDiscard", "playerTwoHand");
             playerTwoHand.addTile(playerOneDiscard.pop());
             if(!playerOneDiscard.isEmpty()) {
