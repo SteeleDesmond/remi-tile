@@ -2,7 +2,6 @@ package remi.game;
 
 import remi.tile.PlayerHand;
 import remi.tile.Tile;
-import remi.tile.TilePool;
 
 /**
  * Contains logic to check if the game has a winner or not. There are 3 code blocks commented out that can be used to
