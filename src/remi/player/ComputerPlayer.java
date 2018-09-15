@@ -33,6 +33,6 @@ public class ComputerPlayer extends Player {
     public void sortHand() {
         clearHand(hand);
         hand.sort();
-        fillHand(hand);
+        fillHand(hand, true);
     }
 }

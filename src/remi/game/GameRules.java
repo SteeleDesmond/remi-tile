@@ -42,9 +42,18 @@ public class GameRules {
         return loserScore;
     }
 
+    /**
+     * Calculate the loser's score based on the game's rules
+     * @param hand The loser's hand
+     */
     private void calculateLoserScore(PlayerHand hand) {
         for(int i = 0; i < hand.size(); i++) {
-            loserScore += hand.getTile(i).getNumber();
+            if(hand.getTile(i).isJoker()) {
+                loserScore += 25;
+            }
+            else {
+                loserScore += hand.getTile(i).getNumber();
+            }
         }
     }
 

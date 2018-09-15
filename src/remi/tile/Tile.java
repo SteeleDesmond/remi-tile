@@ -30,7 +30,16 @@ public class Tile {
         this.color = color.toLowerCase();
         this.isJoker = isJoker;
         this.id = nextId;
+        setTextDisplay();
+        pane.getChildren().addAll(rectangle,text);
+        showTile();
+        nextId++;
+    }
 
+    /**
+     * Sets the properties that a tile needs to have to be a tile for JavaFX. Can be ignored for other displays.
+     */
+    public void setTextDisplay() {
         if(isJoker) {
             text = new Text(";)");
         }
@@ -38,9 +47,22 @@ public class Tile {
         {
             text = new Text(Integer.toString(number));
         }
-        pane.getChildren().addAll(rectangle,text);
-        showTile();
-        nextId++;
+        text.setFont(Font.font ("Verdana", FontWeight.BOLD, 20));
+
+        switch(color) {
+            case "blue":
+                text.setFill(Color.DODGERBLUE);
+                break;
+            case "red":
+                text.setFill(Color.RED);
+                break;
+            case "green":
+                text.setFill(Color.DARKGREEN);
+                break;
+            case "yellow":
+                text.setFill(Color.ORANGE);
+                break;
+        }
     }
 
     public int getId() {
@@ -99,35 +121,18 @@ public class Tile {
     }
 
     /**
-     * Called to make the tile appear face down in JavaFX.
+     * Make the tile appear face down in JavaFX.
      */
     public void hideTile() {
-        rectangle.setFill(Color.CORNFLOWERBLUE);
         text.setVisible(false);
         isHidden = true;
     }
 
     /**
-     * Sets the properties that a tile needs to have to be a tile for JavaFX. Can be ignored for other displays.
-     * @return the StackPane for the constructor
+     * Show the tile's text
      */
     public void showTile() {
-
-        text.setFont(Font.font ("Verdana", FontWeight.BOLD, 20));
-        switch(color) {
-            case "blue":
-                text.setFill(Color.DODGERBLUE);
-                break;
-            case "red":
-                text.setFill(Color.RED);
-                break;
-            case "green":
-                text.setFill(Color.DARKGREEN);
-                break;
-            case "yellow":
-                text.setFill(Color.ORANGE);
-                break;
-        }
+        text.setVisible(true);
         isHidden = false;
     }
 }

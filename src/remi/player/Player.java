@@ -122,6 +122,7 @@ public class Player {
                 tm.moveTile(tilePool.peek(), "tilePool", "playerOneHand");
                 playerOneHand.addTile(tilePool.pop());
             } else {
+                tilePool.peek().hideTile();
                 tm.moveTile(tilePool.peek(), "tilePool", "playerTwoHand");
                 playerTwoHand.addTile(tilePool.pop());
             }
@@ -173,6 +174,7 @@ public class Player {
                                                      && !discardedATile && !isHuman) {
             playerTwoHand.getTile(pcIndexClicked).setSelected(false);
             playerTwoDiscard.push(playerTwoHand.getTile(pcIndexClicked));
+            playerTwoHand.getTile(pcIndexClicked).showTile();
             playerTwoHand.removeTile(pcIndexClicked);
             display.placeTile(playerTwoDiscard.peek(), "playerTwoDiscard");
             display.removeTile(playerTwoDiscard.peek(), "playerTwoHand");
@@ -233,15 +235,31 @@ public class Player {
         display.setClickedReset(value);
     }
 
+    /**
+     * Utility function - Remove all displayed tiles from a player's hand
+     * @param hand The player's hand
+     */
     public void clearHand(PlayerHand hand) {
         for(int i = 0; i < hand.size(); i++) {
             display.removeTile(hand.getTile(i), "playerTwoHand");
         }
     }
 
-    public void fillHand(PlayerHand hand) {
+    /**
+     * Utility function - Display all tiles in a player's hand
+     * @param hand The player's hand
+     * @param hide True = hide the tiles, False = show the tiles
+     */
+    public void fillHand(PlayerHand hand, boolean hide) {
         for(int i = 0; i < hand.size(); i++) {
-            display.placeTile(hand.getTile(i), "playerTwoHand");
+            if(hide) {
+                hand.getTile(i).hideTile();
+                display.placeTile(hand.getTile(i), "playerTwoHand");
+            }
+            else {
+                hand.getTile(i).showTile();
+                display.placeTile(hand.getTile(i), "playerTwoHand");
+            }
         }
     }
 }
