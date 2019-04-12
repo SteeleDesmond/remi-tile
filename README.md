@@ -1,4 +1,5 @@
-# Project #2 - Remi Tile Game
+Author: Steele Desmond - sdesmondemail@gmail.com
+# Remi Tile Game
 
 ## Versions (Jar files)
 
